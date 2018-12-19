@@ -1,6 +1,6 @@
 Name=ErpQueryEndpoint
 URL=
-TrustAll=FALSE
+#TrustAll=FALSE
 Type=HTTP
 Password=
 Authentication=BasicAuthentication

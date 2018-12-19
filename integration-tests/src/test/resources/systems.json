@@ -1,0 +1,11 @@
+{
+  "erp": {
+    "default": "ERP_TEST_SYSTEM",
+    "systems": [
+      {
+        "alias": "ERP_TEST_SYSTEM",
+        "uri": "http://bupamockserver-env.bxk26zdvpt.eu-central-1.elasticbeanstalk.com"
+      }
+    ]
+  }
+}
