@@ -10,25 +10,32 @@
 
     <session-config>
         <session-timeout>20</session-timeout>
+        <cookie-config>
+            <secure>true</secure>
+        </cookie-config>
     </session-config>
 
     <security-role>
         <role-name>Everyone</role-name>
     </security-role>
 
+    <security-role>
+        <role-name>BusinessPartnerManager</role-name>
+    </security-role>
+
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>All SAP Cloud Platform users</web-resource-name>
-            <url-pattern>/*</url-pattern>
+            <web-resource-name>Only for business partner managers</web-resource-name>
+            <url-pattern>/hello</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>Everyone</role-name>
+            <role-name>BusinessPartnerManager</role-name>
         </auth-constraint>
 
         <user-data-constraint>
-            <transport-guarantee>NONE</transport-guarantee>
-            <!-- Use CONFIDENTIAL as transport guarantee to ensure SSL connection (HTTPS) on public deployments
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee> -->
+            <!-- Use CONFIDENTIAL as transport guarantee to ensure SSL connection (HTTPS) on public deployments -->
+            <!--transport-guarantee>NONE</transport-guarantee> -->
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
 
