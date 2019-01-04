@@ -22,6 +22,8 @@ import com.sap.cloud.sdk.s4hana.datamodel.odata.services.DefaultBusinessPartnerS
 public class BusinessPartnerServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+
+    // 1. Get logger for our servlet
     private static final Logger logger = CloudLoggerFactory.getLogger(BusinessPartnerServlet.class);
 
     private static final String CATEGORY_PERSON = "1";
@@ -29,6 +31,10 @@ public class BusinessPartnerServlet extends HttpServlet {
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
+
+        // 2. Log event providing INFO level, info is moderate
+        logger.info("Attempt to SELECT business partners");
+
         try {
             final List<BusinessPartner> businessPartners =
                     new DefaultBusinessPartnerService()
@@ -46,10 +52,15 @@ public class BusinessPartnerServlet extends HttpServlet {
             response.setContentType("application/json");
             response.getWriter().write(new Gson().toJson(businessPartners));
 
+            // 3a. Log event including basic information providing INFO level
+            logger.info("Succeeded to SELECT {} business partners", businessPartners.size());
+
         } catch (final ODataException e) {
-            logger.error(e.getMessage(), e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().write(e.getMessage());
+
+            // 3b. Log event including exception providing ERROR level
+            logger.error("Failed to SELECT business partners", e);
         }
     }
 }
